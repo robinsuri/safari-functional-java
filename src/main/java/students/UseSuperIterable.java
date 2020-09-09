@@ -25,8 +25,10 @@ public class UseSuperIterable {
         System.out.println("---------------------");
         roster
 //                .filter(__ -> __.getGrade() > 70)
+                .peek(s -> System.out.println(">> " + s))
                 .filter(s -> s.getGrade() > 70)
                 .flatMap(s -> new SuperIterable<>(s.getCourses()))
+                .peek(s -> System.out.println("++ " + s))
                 .forEach(s -> System.out.println(s));
     }
 }

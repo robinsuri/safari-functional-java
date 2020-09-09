@@ -53,6 +53,13 @@ public class SuperIterable<E> implements Iterable<E> {
         }
     }
 
+    public SuperIterable<E> peek(Consumer<E> op) {
+        for (E e : self) {
+            op.accept(e);
+        }
+        return this;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return self.iterator();

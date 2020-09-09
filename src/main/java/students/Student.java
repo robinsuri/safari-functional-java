@@ -9,6 +9,7 @@ public final class Student {
     private final List<String> courses;
 
     private Student(String name, int grade, List<String> courses) {
+        if (name == null) throw new IllegalArgumentException("Must have a name");
         this.name = name;
         this.grade = grade;
         this.courses = courses;
@@ -20,6 +21,10 @@ public final class Student {
 
     public String getName() {
         return name;
+    }
+
+    public Student setName(String name) {
+        return new Student(name, this.grade, this.courses);
     }
 
     public int getGrade() {
