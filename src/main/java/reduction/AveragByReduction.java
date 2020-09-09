@@ -4,6 +4,7 @@ import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 class ImmutAverage {
@@ -38,6 +39,11 @@ public class AveragByReduction {
         long start = System.nanoTime();
 
         ThreadLocalRandom.current().doubles(2_000_000_000, -Math.PI, +Math.PI)
+
+//        DoubleStream.iterate(0.0, x -> ThreadLocalRandom.current().nextDouble(-Math.PI, +Math.PI))
+//                .limit(2_000_000_000)
+//                .unordered() // Doesn't seem to work!!!
+
                 .parallel()
                 .boxed()
                 .reduce(new ImmutAverage(0, 0),
